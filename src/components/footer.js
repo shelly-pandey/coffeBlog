@@ -23,12 +23,15 @@ import images18 from "../assets/images/sponsors/images18.png";
 import images19 from "../assets/images/sponsors/images19.png";
 import images20 from "../assets/images/sponsors/images20.png";
 
+import Info from "./info";
+
 export default function Footer() {
   const mdbreact = require("mdbreact");
   const { Footer, Container } = mdbreact;
 
   return (
     <>
+      <Info/>
       <Navbar>
         <Container>
           <Navbar.Brand href="#home"></Navbar.Brand>
@@ -55,6 +58,7 @@ export default function Footer() {
               <img src={images18} alt=""></img>
               <img src={images19} alt=""></img>
               <img src={images20} alt=""></img>
+              
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

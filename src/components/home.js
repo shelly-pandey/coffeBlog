@@ -5,8 +5,11 @@ import image4 from "../assets/images/posts/img4.png";
 import image3 from "../assets/images/posts/img3.png";
 import image2 from "../assets/images/posts/img2.png";
 import Section from "./section";
+import MyPaginator from "./MyPaginator";
 import { blogData } from "../data.js";
-import "../App.css";
+import usePagination from "../hooks/usePagination";
+
+import "../css/section.css";
 
 export default function Home() {
   const [filteredBlogData, setFilteredBlogData] = useState(blogData);
@@ -31,6 +34,15 @@ export default function Home() {
       );
     });
   }
+
+  const ITEMS_PER_PAGE = 5;
+  const {
+    currentPage, getCurrentData, changePage, pageCount,
+  } = usePagination(filteredBlogData, ITEMS_PER_PAGE);
+
+  const onPageChange = (event, value) => changePage(value);
+  
+
 
   return (
     <div>
@@ -61,7 +73,15 @@ export default function Home() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <Section filteredBlogData={filteredBlogData} />
+     
+      <Section filteredBlogData={getCurrentData()} />
+      <MyPaginator
+        itemCount={filteredBlogData.length}
+        itemsPerPage={ITEMS_PER_PAGE}
+        onPageChange={onPageChange}
+        currentPage={currentPage}
+        pageCount={pageCount}
+      />
     </div>
   );
 }
